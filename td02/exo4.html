@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>exo 1</title>
+</head>
+<body>
+<ul id="list">
+
+</ul>
+
+
+
+<script src="jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        // Ecrire les scripts ici
+        $.ajax({
+            url: "http://www.labri.fr/perso/pbiasutt/KDJS/TD02/characters.php",
+            dataType: "json",
+            beforeSend: function(){ console.log("Envoi de la requete ...")},
+            complete: function(data){
+                //console.log(JSON.parse(data.responseText));
+                var obj = JSON.parse(data.responseText);
+                for(var i=0; i<obj.length; i++){
+                    $("#list").append("<li>"+ obj[i].name+" "+obj[i].id+"</li>");
+                }
+            }
+        });
+
+    });
+</script>
+</body>
+</html>

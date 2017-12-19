@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>exo 1</title>
+</head>
+<body>
+<form action="#">
+    <input id="txt" type="text" placeholder="chiffre ou nombre">
+    <input id="sub" type="submit">
+</form>
+
+
+
+<script src="jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        // Ecrire les scripts ici
+        $.ajax({
+            url: "http://www.labri.fr/perso/pbiasutt/KDJS/TD02/functions.php",
+            dataType: "script",
+            beforeSend: function(){ console.log("Envoi de la requete ...")},
+            complete: $("#sub").click(function () {
+                alert(isPrime($("#txt").val()))
+            })
+        });
+
+    });
+</script>
+</body>
+</html>

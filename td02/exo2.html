@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>exo 1</title>
+</head>
+<body>
+<div id="div1">
+</div>
+<div id="div2">
+</div>
+<button id="btn1">Chargement 1</button>
+<button id="btn2">Chargement 2</button>
+
+
+
+<script src="jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        // Ecrire les scripts ici
+        $('#btn1').click(function(){
+            $('#div1')
+                .prepend('<img src="http://i.imgur.com/P5ApKIy.gif">')
+                .load('http://www.labri.fr/perso/pbiasutt/KDJS/TD02/exo1.php #conteneur1');
+        });
+        $('#btn2').click(function(){
+            $('#div2')
+                .prepend('<img src="http://i.imgur.com/P5ApKIy.gif">')
+                .load('http://www.labri.fr/perso/pbiasutt/KDJS/TD02/exo1.php #conteneur2');
+        });
+
+    });
+</script>
+</body>
+</html>

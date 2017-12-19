@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            padding: 20px 20px;
+            border: 2px solid black;
+            margin: 10px 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="parent" style="border:5px solid black; height: 500px; width: 500px;">
+    <div id="draggable" style="background-color: red; height: 100px; width: 100px;">
+
+    </div>
+</div>
+<ul>
+    <li id="posX"></li>
+    <li id="posY"></li>
+</ul>
+
+<div style="width: 100%; border-top: 5px solid black; margin-top: 50px ">
+    <p>Exercice 1 question 2</p>
+    <ul id="sortable">
+        <li id="l1" class="box">bonjour je suis la</li>
+        <li id="l2" class="box">Non en fait je suis ici</li>
+        <li id="l3" class="box">Non je suis en prison</li>
+        <li id="l4" class="box">Bonjour, je suis en dessous</li>
+        <li id="l5" class="box">C'était un prank, je suis mort</li>
+    </ul>
+    <button id="order"> Click moi la</button>
+    <div id="order-brut"></div>
+</div>
+
+<div style="width: 100%; border-top: 5px solid black; margin-top: 50px ">
+    <p id="saoul">Touche moi et je deviens saoul</p>
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+<script>
+    $( function() {
+        //Exercice 1 1)
+        $( "#draggable" ).draggable({
+            containment: "#parent",
+            drag: function(){
+                var offset = $(this).offset();
+                var xPos = offset.left;
+                var yPos = offset.top;
+                $('#posX').text('x: ' + xPos);
+                $('#posY').text('y: ' + yPos);
+            }
+        });
+
+        //Exercice 1 2)
+        $( function() {
+            $( "#sortable" ).sortable();
+            $( "#sortable" ).disableSelection();
+            $("#order").click(function(){
+                var order = $("#order-brut");
+                var el = $('<p>'+$('ul li').text()+'</p>')
+                order.append(el)
+
+            })
+
+        } );
+
+        //Exercice 2
+        (function($){
+            $.fn.hoverScalable = function(parametre){
+                this.each(function () {
+                    $(this).hover(function(){
+                        $(this).css('font-size', '+=2px')
+                    });
+                })
+
+                return this;
+            };
+        })(jQuery);
+
+        $("#saoul").hoverScalable();
+
+    } );
+</script>
+</body>
+</html>

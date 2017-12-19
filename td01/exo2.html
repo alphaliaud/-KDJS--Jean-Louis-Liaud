@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8" />
+
+    <title>Exercice 05</title>
+    <meta name="description" content="Description de la page">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+
+    <style>
+        body{ font-family: 'Quicksand', sans-serif; }
+    </style>
+
+    <script src="jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+        function Etudiant(prenom, nom, num, date) {
+            this.prenom = prenom;
+            this.nom = nom;
+            this.num = num;
+            this.date = age;
+            this.presenter = function(){
+                console.log("Je suis " + this.prenom + " " + this.nom
+                    + " et j’ai " + this.age + "ans");
+            };
+            this.age = function(){
+                var date=new Date();
+                var d = date.getDay();
+                var db = this.age[0];
+                var m = date.getMonth();
+                var mb = this.age[1];
+                var y = date.getFullYear();
+                var yb = this.age[2];
+
+                var age = y - yb;
+                age = m<mb && d<db ? m>mb && d>db : age - 1;
+
+                console.log("Vous avez :" + age);
+            };
+        };
+
+        var Etudiant = new Etudiant("bn", "bn", "0", [2, 8, 1996]);
+        var age = Etudiant.age();
+
+    </script>
+
+</head>
+<body>
+<input type="text" id="test">
+
+</body>
+</html>

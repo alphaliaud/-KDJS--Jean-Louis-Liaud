@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+<div ng-app="first-app" ng-controller="ctr">
+
+    <input ng-model="nb1" type="text" placeholder="nombre1" id="nb1">
+    <input ng-model="nb2" type="text" placeholder="nombre2" id="nb2">
+    <select ng-model="op" name="calcul" id="calcul">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+    <input type="text" ng-value="result()" readonly>
+</div>
+
+<script>
+    var app = angular.module("first-app", []);
+
+    app.controller('ctr', function ($scope) {
+        $scope.nb1 = 1
+        $scope.nb2 = 2
+        $scope.op = '+'
+        $scope.result = function () {
+            return eval($scope.nb1 + $scope.op + $scope.nb2)
+        }
+    })
+
+</script>
+</body>
+</html>
+
+
+

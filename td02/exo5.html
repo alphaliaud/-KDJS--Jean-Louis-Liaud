@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>exo 1</title>
+</head>
+<body>
+<form method="POST">
+    <select name="select" id="select">
+        <option value="nom">Nom</option>
+        <option value="cp">Code Postal</option>
+        <option value="cd">Code Département</option>
+    </select>
+    <input id="txt" type="text" placeholder="commune">
+    <input type="submit" id="btn"></input>
+</form>
+
+<ul style="display:block" id="list">
+
+</ul>
+
+<script src="jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        // Ecrire les scripts ici
+        $('form').on('submit', function (event) {
+            event.preventDefault();
+
+            var reqtype = $(this).find('select').val(),
+                reqtxt = $(this).find('#txt').val(),
+                req;
+
+            switch(reqtype){
+                case 'nom':
+                    req = 'https://geo.api.gouv.fr/communes?nom='+reqtxt;
+                    break;
+
+                case 'cp':
+                    req = 'https://geo.api.gouv.fr/communes?codePostal='+reqtxt;
+                    break;
+
+                case 'cd':
+                    req = 'https://geo.api.gouv.fr/communes?codeDepartement='+reqtxt;
+                    break;
+
+            }
+
+            $.ajax({
+                url: req,
+                dataType: "json",
+                beforeSend: function(){ $("#list").empty() },
+                complete: function(data){
+
+                    var obj = JSON.parse(data.responseText);
+                    for(var i=0; i<obj.length; i++){
+                        $("#list").append("<li>"+ obj[i].nom+" | "+obj[i].code+" | "+obj[i].codeDepartement+" | "+obj[i].codeRegion+"</li>");
+                    }
+                }
+            });
+
+        })
+
+    });
+</script>
+</body>
+</html>

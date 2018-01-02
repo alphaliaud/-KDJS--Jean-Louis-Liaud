@@ -42,6 +42,7 @@
 			ulElement.html('')
 
 			$.getJSON(path).done(function (data) {
+				//Filtre les données avec un nom
 				characters = results = data.filter(function(item){
 					return item.name !== "";
 				})
@@ -51,17 +52,25 @@
 			
 			$('input').on('keydown', function (event) {
 
-				if (($('input').val().length <= 0)) return allcharacter(characters);
+				if (($(this).val().length <= 0)) return allcharacter(characters);
 
-                var query = $(this).val().split(/\s/).filter(word => word !== '').join('|')
+                var qry = $(this).val().split(/\s/).filter(word => word !== '').join('|')
 
                 results = characters.filter(function (character) {
-					return character.name.match(query)
+					return character.name.match(qry)
 				})
 
 				allcharacter(results);
+			})
 
-				$('ul li a').on('click', function (event) {
+			function allcharacter(param){
+				ulElement.html('')
+					param.forEach(function (character) {
+						//console.log(character.url+" "+character.name)
+						var liElement = $('<li><a href="' + character.url + '">' + character.name + '</a></li>')
+						ulElement.append(liElement)
+					})
+					$('ul li a').on('click', function (event) {
 					event.preventDefault()
 					
 					panel.find('ul').append(
@@ -78,14 +87,6 @@
 						}
 					})
 				})
-			})
-
-			function allcharacter(param){
-					param.forEach(function (character) {
-						console.log(character.url+" "+character.name)
-						var liElement = $('<li><a href="' + character.url + '">' + character.name + '</a></li>')
-						ulElement.append(liElement)
-					})
 			}
     	})
    	</script>
